@@ -19,8 +19,8 @@ int bubbleSort(int array[], int n){
 }
 
 //Counts # of swaps for each number using bubble sort
-int * bubbleCount(int array[], int n, int sortedArray[]){
-    int *freq = (int*) calloc(9, sizeof(int));
+int * bubbleCount(int array[], int * freq, int n, int sortedArray[]){
+    freq = (int*) calloc(9, sizeof(int));
     int i, j, k, tmp;
     for (i = 0; i < n; i++){
         freq[i] = 0;
@@ -65,8 +65,8 @@ int selectSort(int array[], int n){
     return count2;
 }
 //Counts # of swap for each number using selection sort
-int * selectCount(int array[], int n, int sortedArray[]){
-    int *count = (int*) calloc(9, sizeof(int));
+int * selectCount(int array[], int * count, int n, int sortedArray[]){
+    count = (int*) calloc(9, sizeof(int));
     int i, j, k, min, tmp;
     for (i = 0; i < n-1; i++){
         min = i;
@@ -104,14 +104,16 @@ int main(){
     int *freq2;
     int *freq3;
     int *freq4;
+    int *freq;
+    int *count;
     
     //Total # of swaps using bubble sort
     total1 = bubbleSort(array1, n);
     total2 = bubbleSort(array2, n);
     
     //Number of swaps for each number using bubble sort
-    freq1 = bubbleCount(array11, n, array1);
-    freq2 = bubbleCount(array22, n, array2);
+    freq1 = bubbleCount(array11, freq, n, array1);
+    freq2 = bubbleCount(array22, freq, n, array2);
     
     //Prints the swaps for array 1 using bubble sort
     printf("array1 bubble sort: \n");
@@ -137,8 +139,8 @@ int main(){
     total4 = selectSort(array4, n);
 
     //Number of swaps for each number using selection sort
-    freq3 = selectCount(array33, n, array3);
-    freq4 = selectCount(array44, n, array4);
+    freq3 = selectCount(array33, count, n, array3);
+    freq4 = selectCount(array44, count, n, array4);
 
     //Prints the swaps for array 1 using selection sort
     printf("\narray1 selection sort: \n");
@@ -159,6 +161,8 @@ int main(){
     free(freq2);
     free(freq3);
     free(freq4);
-
+    free(freq);
+    free(count);
+    
     return 0;
 }
